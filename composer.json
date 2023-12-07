@@ -43,6 +43,7 @@
         ],
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-html=tests/coverage/ ",
+        "test-path-coverage": "phpunit --path-coverage --colors=always --coverage-html=tests/coverage/ ",
         "test-coverage-ci": "phpunit --verbose --coverage-clover build/logs/clover.xml",
         "check-style": "php-cs-fixer fix --dry-run",
         "fix-style": "php-cs-fixer fix",
