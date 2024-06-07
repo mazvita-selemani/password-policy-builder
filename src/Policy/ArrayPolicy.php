@@ -26,16 +26,24 @@ final class ArrayPolicy implements PolicyInterface
      * @throws InvalidConstraintException
      * @throws InvalidRuleTypeException
      */
-    public function loadConstraints(array $policy): void
+    private function loadConstraints(array $policy): void
     {
+
         if (empty($policy)) {
             throw new InvalidConstraintException('Policy cannot be empty');
         }
 
         foreach ($policy as $ruleClassName => $number) {
-            $rule = $this->getRule($ruleClassName, $number);
-            $this->constraints[$ruleClassName] = $rule;
+            $this->getRules($ruleClassName, $number);
         }
+    }
+
+    /**
+     * @throws InvalidRuleTypeException
+     */
+    private function getRules($ruleClassName, $number): void
+    {
+        $this->constraints[$ruleClassName] = $this->getRule($ruleClassName, $number);
     }
 
     /**

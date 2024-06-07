@@ -5,5 +5,4 @@ tests/coverage/
 
 composer.lock
 .phpunit.result.cache
-src/DummyClass.php
-tests/phpunit/DummyClassTest.php
+.php-cs-fixer.cache
