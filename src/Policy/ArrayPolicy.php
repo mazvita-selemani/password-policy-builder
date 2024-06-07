@@ -16,7 +16,7 @@ final class ArrayPolicy implements PolicyInterface
      * @throws InvalidConstraintException
      * @throws InvalidRuleTypeException
      */
-    public function __construct(array $policy) //this is not a policy it's a rule
+    public function __construct(array $policy)
     {
         $this->loadConstraints($policy);
     }
@@ -41,7 +41,7 @@ final class ArrayPolicy implements PolicyInterface
     /**
      * @throws InvalidRuleTypeException
      */
-    private function getRules($ruleClassName, $number): void
+    private function getRules(string $ruleClassName, int $number): void
     {
         $this->constraints[$ruleClassName] = $this->getRule($ruleClassName, $number);
     }

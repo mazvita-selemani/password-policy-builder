@@ -3,10 +3,10 @@
 use PHPUnit\Framework\TestCase;
 use StaySafe\Password\Policy\Rule\DigitRule;
 use StaySafe\Password\Policy\Policy\ArrayPolicy;
-use StaySafe\Password\Policy\Rule\Exception\InvalidRuleTypeException;
-use StaySafe\Password\Policy\Rule\Exception\InvalidConstraintException;
 use StaySafe\Password\Policy\Rule\MinimumLengthRule;
 use StaySafe\Password\Policy\Rule\SpecialCharacterRule;
+use StaySafe\Password\Policy\Rule\Exception\InvalidRuleTypeException;
+use StaySafe\Password\Policy\Rule\Exception\InvalidConstraintException;
 
 /**
  * @covers StaySafe\Password\Policy\Policy\ArrayPolicy
@@ -24,8 +24,6 @@ final class ArrayPolicyTest extends TestCase
             ['abc'],
             [date("l", mktime(0, 0, 0, 7, 1, 2000))],
             [1000000000000000000000000000000008888800000000000000000]
-            // [true], passes as boolean converted to int 1
-            // [0.0001] passes as decimal converted to int 0
         ];
     }
 

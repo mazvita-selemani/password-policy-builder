@@ -9,6 +9,7 @@ use StaySafe\Password\Policy\Rule\MinimumLengthRule;
 use StaySafe\Password\Policy\Rule\SpecialCharacterRule;
 use StaySafe\Password\Policy\Rule\LowerCaseCharacterRule;
 use StaySafe\Password\Policy\Rule\UpperCaseCharacterRule;
+use StaySafe\Password\Policy\PasswordPolicyBuilderInterface;
 use StaySafe\Password\Policy\Rule\Exception\InvalidRuleTypeException;
 use StaySafe\Password\Policy\Rule\Exception\InvalidConstraintException;
 
@@ -18,15 +19,12 @@ use StaySafe\Password\Policy\Rule\Exception\InvalidConstraintException;
 final class PasswordPolicyBuilderTest extends TestCase
 {
 
-    //  private const RULE_CLASS_PREFIX = 'StaySafe\\Password\\Policy\\Rule\\';
-
-
     /**
      * @throws InvalidRuleTypeException
      * @throws InvalidConstraintException
      * @dataProvider provideConstraints
      */
-    public static function setUpPasswordPolicyBuilder($constraints): \StaySafe\Password\Policy\PasswordPolicyBuilderInterface
+    public static function setUpPasswordPolicyBuilder($constraints): PasswordPolicyBuilderInterface
     {
 
         $arrayPolicy = new ArrayPolicy($constraints);
@@ -138,8 +136,6 @@ final class PasswordPolicyBuilderTest extends TestCase
 
         $decoupledPasswordPolicyBuilder = new PasswordPolicyBuilder($passwordPolicyBuilder);
 
-       // $enforcedRulesPolicy = $decoupledPasswordPolicyBuilder::createWithEnforcedRules($policy, $rules);
-
         $enforcedRulesPolicy = PasswordPolicyBuilder::createWithEnforcedRules($policy, $rules);
 
         self::assertEquals($enforcedRulesPolicy, $decoupledPasswordPolicyBuilder);
@@ -150,8 +146,8 @@ final class PasswordPolicyBuilderTest extends TestCase
      * @throws InvalidConstraintException
      * @throws InvalidRuleTypeException
      */
-    //exception to be added
-    public function test_that_password_policy_builder_throws_exception_when_policy_constraints_and_rule_class_name_do_not_match(){
+    public function test_when_policy_constraints_and_rule_class_name_do_not_match()
+    {
 
         $arrayPolicy = new ArrayPolicy([UpperCaseCharacterRule::class=>9]);
 
@@ -159,8 +155,7 @@ final class PasswordPolicyBuilderTest extends TestCase
 
         $decoupledPasswordPolicyBuilder = new PasswordPolicyBuilder($passwordPolicyBuilder);
 
-        $enforcedRulesPolicyBuilder = PasswordPolicyBuilder::createWithEnforcedRules
-        (new ArrayPolicy([UpperCaseCharacterRule::class=>9]), [new DigitRule()]);
+        $enforcedRulesPolicyBuilder = PasswordPolicyBuilder::createWithEnforcedRules(new ArrayPolicy([UpperCaseCharacterRule::class=>9]), [new DigitRule()]);
 
         self::assertNotEquals($enforcedRulesPolicyBuilder, $decoupledPasswordPolicyBuilder);
     }
@@ -184,7 +179,6 @@ final class PasswordPolicyBuilderTest extends TestCase
     {
         return [
             [
-                //dataset #0
                 [
                     MinimumLengthRule::class => 8,
                     SpecialCharacterRule::class => 2,
@@ -204,7 +198,6 @@ final class PasswordPolicyBuilderTest extends TestCase
     {
         return [
             [
-                //dataset #0
                 [
                     new MinimumLengthRule(),
                     new SpecialCharacterRule(),
